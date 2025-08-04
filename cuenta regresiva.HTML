@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuenta Regresiva Misteriosa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a0525 0%, #2d0a3b 50%, #1a0525 100%);
+            color: #ffffff;
+            font-family: 'Montserrat', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .star {
+            position: absolute;
+            background-color: #fff;
+            border-radius: 50%;
+            animation: twinkle 4s infinite ease-in-out;
+        }
+        
+        .container {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            width: 100%;
+            max-width: 1200px;
+            padding: 20px;
+        }
+        
+        .logo {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 24px;
+            letter-spacing: 3px;
+            color: #d8b4fe;
+            text-transform: uppercase;
+        }
+        
+        .mystery-message {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            font-weight: 300;
+            color: #e9d5ff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            line-height: 1.4;
+            text-shadow: 0 0 10px rgba(216, 180, 254, 0.5);
+        }
+        
+        .highlight {
+            color: #f0abfc;
+            font-weight: 600;
+            text-shadow: 0 0 15px rgba(240, 171, 252, 0.8);
+        }
+        
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin: 40px 0;
+        }
+        
+        #countdown {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 10vw;
+            font-weight: 900;
+            color: #f0abfc;
+            text-shadow: 0 0 20px rgba(240, 171, 252, 0.8);
+            letter-spacing: 5px;
+            line-height: 1;
+        }
+        
+        .units {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .unit {
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #c084fc;
+            position: relative;
+            padding: 10px 20px;
+            background: rgba(123, 44, 191, 0.2);
+            border-radius: 10px;
+            border: 1px solid rgba(192, 132, 252, 0.3);
+        }
+        
+        .footer-message {
+            margin-top: 50px;
+            font-size: 1.5rem;
+            color: #d8b4fe;
+            max-width: 700px;
+            line-height: 1.6;
+            background: rgba(72, 12, 122, 0.3);
+            padding: 20px 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(216, 180, 254, 0.2);
+        }
+        
+        .event-date {
+            margin-top: 20px;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #f0abfc;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        
+        .hashtag {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: #c084fc;
+            letter-spacing: 2px;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+        
+        #countdown {
+            animation: pulse 2s infinite ease-in-out;
+        }
+        
+        @media (max-width: 768px) {
+            #countdown {
+                font-size: 15vw;
+            }
+            
+            .mystery-message {
+                font-size: 1.3rem;
+            }
+            
+            .footer-message {
+                font-size: 1.2rem;
+            }
+            
+            .units {
+                gap: 10px;
+            }
+            
+            .unit {
+                font-size: 0.9rem;
+                padding: 8px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    
+    <div class="container">
+        <div class="logo">GrupoUribe</div>
+        
+        <div class="mystery-message">
+            Una <span class="highlight">experiencia transformadora</span> está por comenzar
+        </div>
+        
+        <div class="countdown-container">
+            <div id="countdown">00:00:00:00</div>
+        </div>
+        
+        <div class="units">
+            <div class="unit">Días</div>
+            <div class="unit">Horas</div>
+            <div class="unit">Minutos</div>
+            <div class="unit">Segundos</div>
+        </div>
+        
+        <div class="footer-message">
+            Prepárate para descubrir un evento único que revolucionará tu bienestar. 
+            <span class="highlight">Tu salud es tu mejor inversión</span> y estamos a punto de revelar algo extraordinario.
+        </div>
+        
+        <div class="event-date">
+            2 de agosto - Auditorio Principal
+        </div>
+        
+        <div class="hashtag">#TuSaludTuMejorOutfit</div>
+    </div>
+
+    <script>
+        // Crear estrellas para el fondo
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const starsCount = 150;
+            
+            for (let i = 0; i < starsCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                
+                // Tamaño aleatorio
+                const size = Math.random() * 3;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                
+                // Posición aleatoria
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                
+                // Retraso de animación aleatorio
+                star.style.animationDelay = `${Math.random() * 5}s`;
+                
+                starsContainer.appendChild(star);
+            }
+        }
+        
+        // Configurar la cuenta regresiva
+        function setupCountdown() {
+            const countdownElement = document.getElementById('countdown');
+            
+            // Fecha objetivo: 2 de agosto de 2025 a las 10:00 AM (hora de Bogotá, UTC-5)
+            const targetDate = new Date('2025-08-02T10:00:00-05:00');
+            
+            function updateCountdown() {
+                const now = new Date();
+                const diff = targetDate - now;
+                
+                // Cálculos de tiempo
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                
+                // Formatear para mostrar con dos dígitos
+                const formattedDays = days.toString().padStart(2, '0');
+                const formattedHours = hours.toString().padStart(2, '0');
+                const formattedMinutes = minutes.toString().padStart(2, '0');
+                const formattedSeconds = seconds.toString().padStart(2, '0');
+                
+                // Actualizar el elemento
+                countdownElement.textContent = `${formattedDays}:${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+                
+                // Cambiar color cuando queden menos de 24 horas
+                if (days === 0 && hours < 24) {
+                    countdownElement.style.color = '#f472b6';
+                    countdownElement.style.textShadow = '0 0 20px rgba(244, 114, 182, 0.8)';
+                }
+            }
+            
+            // Actualizar cada segundo
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        }
+        
+        // Inicializar
+        window.onload = function() {
+            createStars();
+            setupCountdown();
+        };
+    </script>
+</body>
+</html>
